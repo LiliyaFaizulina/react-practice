@@ -1,0 +1,1 @@
+export const Button = ({ type, text, clickHandler }) => (<button type={type} onClick={clickHandler}>{text}</button>)
