@@ -4,6 +4,8 @@ import { UserList } from "./UserList/UserList";
 // import { Section } from "./Section/Section";
 import { Component } from "react";
 import { Button } from "./Button/Button";
+import { AddUserForm } from "./AddUserForm/AddUserForm";
+import { nanoid } from "nanoid";
 
 export class App extends Component {
   state = {
@@ -23,12 +25,25 @@ export class App extends Component {
     this.setState(prevState => ({users: prevState.users.map(user=>user.id !== userId? user: {...user, hasJob: !user.hasJob})}))
   }
 
+  addUser = data => {
+    const newUser = {
+      ...data,
+      hasJob: false,
+      id: nanoid(),
+    }
+    this.setState(prevState=>({users: [...prevState.users, newUser]}))
+  }
+
   render() {
     const { isListShown, users } = this.state;
     return (
       <>
+        
         {isListShown ?
-          <UserList users={users} deleteUser={this.deleteUser} changeJobStatus={this.changeJobStatus} />
+          <>
+            <AddUserForm addUser={this.addUser} />
+            <UserList users={users} deleteUser={this.deleteUser} changeJobStatus={this.changeJobStatus} />
+          </>
           : <Button
             type='button'
             text='Show users list'
