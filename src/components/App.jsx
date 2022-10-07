@@ -10,7 +10,8 @@ import { nanoid } from "nanoid";
 export class App extends Component {
   state = {
     users,
-    isListShown: false
+    isListShown: false,
+    userToUpdate: {}
   }
 
   showUserList = () => {
@@ -25,6 +26,23 @@ export class App extends Component {
     this.setState(prevState => ({users: prevState.users.map(user=>user.id !== userId? user: {...user, hasJob: !user.hasJob})}))
   }
 
+  showUpdateForm = userId => {
+    const userToUpdate = this.state.users.find(user=>user.id === userId)
+    this.setState({
+      userToUpdate
+    })
+  }
+
+  updateUser = user => {
+    const idx = this.state.users.findIndex(u => u.id === user.id)
+    const updateUsers = [...this.state.users];
+    updateUsers.splice(idx, 1, user);
+    this.setState({
+      users: updateUsers,
+      userToUpdate: {}
+    })
+  }
+
   addUser = data => {
     const newUser = {
       ...data,
@@ -35,14 +53,21 @@ export class App extends Component {
   }
 
   render() {
-    const { isListShown, users } = this.state;
+    const { isListShown, users, userToUpdate } = this.state;
     return (
       <>
         
         {isListShown ?
           <>
             <AddUserForm addUser={this.addUser} />
-            <UserList users={users} deleteUser={this.deleteUser} changeJobStatus={this.changeJobStatus} />
+            <UserList
+              users={users}
+              deleteUser={this.deleteUser}
+              changeJobStatus={this.changeJobStatus}
+              showUpdateForm={this.showUpdateForm}
+              userToUpdate={userToUpdate}
+              updateUser={this.updateUser}
+            />
           </>
           : <Button
             type='button'
