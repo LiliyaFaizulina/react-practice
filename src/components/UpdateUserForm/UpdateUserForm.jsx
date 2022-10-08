@@ -8,7 +8,7 @@ export class UpdateUserForm extends Component {
     }
 
     static propTypes = {
-        addUser: PropTypes.func.isRequired
+        updateUser: PropTypes.func.isRequired
     }
 
     handleChange = ({target: { name, value }}) => {
