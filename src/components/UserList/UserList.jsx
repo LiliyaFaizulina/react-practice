@@ -1,12 +1,13 @@
 import PropTypes from "prop-types";
 import { User } from "../User/User";
+import styles from "./UserList.module.css";
 
 export const UserList = ({ users, deleteUser, changeJobStatus, showUpdateForm, userToUpdate, updateUser }) => {
   return (
-    <ul>
+    <ul className={styles.userList}>
       {users.map((user) => {
         return (
-          <li key={user.id}>
+          <li className={styles.userItem} key={user.id}>
             <User
               user={user}
               deleteUser={deleteUser}

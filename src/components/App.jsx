@@ -33,12 +33,12 @@ export class App extends Component {
     })
   }
 
-  updateUser = user => {
-    const idx = this.state.users.findIndex(u => u.id === user.id)
-    const updateUsers = [...this.state.users];
-    updateUsers.splice(idx, 1, user);
+  updateUser = updatedUser => {
+    const idx = this.state.users.findIndex(user => user.id === updatedUser.id)
+    const users = [...this.state.users];
+    users.splice(idx, 1, updatedUser);
     this.setState({
-      users: updateUsers,
+      users,
       userToUpdate: {}
     })
   }
@@ -53,26 +53,26 @@ export class App extends Component {
   }
 
   render() {
-    const { isListShown, users, userToUpdate } = this.state;
+    const {state: {isListShown, users, userToUpdate }, addUser, deleteUser, changeJobStatus, showUpdateForm, updateUser, showUserList} = this;
     return (
       <>
         
         {isListShown ?
           <>
-            <AddUserForm addUser={this.addUser} />
+            <AddUserForm addUser={addUser} />
             <UserList
               users={users}
-              deleteUser={this.deleteUser}
-              changeJobStatus={this.changeJobStatus}
-              showUpdateForm={this.showUpdateForm}
+              deleteUser={deleteUser}
+              changeJobStatus={changeJobStatus}
+              showUpdateForm={showUpdateForm}
               userToUpdate={userToUpdate}
-              updateUser={this.updateUser}
+              updateUser={updateUser}
             />
           </>
           : <Button
             type='button'
             text='Show users list'
-            clickHandler={this.showUserList}
+            clickHandler={showUserList}
           />
         }
     </>

@@ -1,5 +1,6 @@
 import { Component } from "react";
 import PropTypes from "prop-types";
+import styles from './AddUserForm.module.css'
 
 export class AddUserForm extends Component {
     state = {
@@ -11,11 +12,11 @@ export class AddUserForm extends Component {
         addUser: PropTypes.func.isRequired
     }
 
-    handleNameInput = ({target: { name, value }}) => {
+    handleInput = ({target: { name, value }}) => {
         this.setState({[name]: value})
     }
 
-    onSubmit = e => {
+    handleSubmit = e => {
         e.preventDefault()
         this.props.addUser(this.state);
         this.reset();
@@ -27,17 +28,17 @@ export class AddUserForm extends Component {
     }
 
     render() {
-        const { name, email } = this.state;
-        return (<form onSubmit={this.onSubmit}>
-            <label>
+        const { state: {name, email}, handleSubmit, handleInput } = this;
+        return (<form className={styles.addUserForm} onSubmit={handleSubmit}>
+            <label className={styles.addFormLabel}>
                 Name
-                <input type="text" name="name" value={name} onChange={this.handleNameInput} />
+                <input className={styles.addFormInput} type="text" name="name" value={name} onChange={handleInput} />
             </label>
-            <label>
+            <label className={styles.addFormLabel}>
                 Email
-                <input type="text" name="email" value={email} onChange={this.handleNameInput} />
+                <input className={styles.addFormInput} type="text" name="email" value={email} onChange={handleInput} />
             </label>
-            <button type="submit">Add user</button>
+            <button className={styles.addBtn} type="submit">Add user</button>
         </form>)
     }
 }

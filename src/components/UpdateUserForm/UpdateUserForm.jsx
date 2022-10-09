@@ -1,5 +1,6 @@
 import { Component } from "react";
 import PropTypes from "prop-types";
+import styles from "./UpdateUserForm.module.css";
 
 export class UpdateUserForm extends Component {
     state = {
@@ -8,14 +9,15 @@ export class UpdateUserForm extends Component {
     }
 
     static propTypes = {
-        updateUser: PropTypes.func.isRequired
+        updateUser: PropTypes.func.isRequired,
+        userToUpdate: PropTypes.object.isRequired
     }
 
     handleChange = ({target: { name, value }}) => {
         this.setState({[name]: value})
     }
 
-    onSubmit = e => {
+    handleSubmit = e => {
         e.preventDefault();
         this.props.updateUser({ ...this.props.userToUpdate, ...this.state });
         
@@ -23,17 +25,17 @@ export class UpdateUserForm extends Component {
 
 
     render() {
-        const { name, email } = this.state;
-        return (<form onSubmit={this.onSubmit}>
+        const { state: {name, email}, handleChange, handleSubmit } = this;
+        return (<form className={styles.updateForm} onSubmit={handleSubmit}>
             <label>
                 Name
-                <input type="text" name="name" value={name} onChange={this.handleChange} />
+                <input className={styles.updateFormInput} type="text" name="name" value={name} onChange={handleChange} />
             </label>
             <label>
                 Email
-                <input type="text" name="email" value={email} onChange={this.handleChange} />
+                <input className={styles.updateFormInput} type="text" name="email" value={email} onChange={handleChange} />
             </label>
-            <button type="submit">Add user</button>
+            <button className={styles.updateFormBtn} type="submit">Save changes</button>
         </form>)
     }
 }

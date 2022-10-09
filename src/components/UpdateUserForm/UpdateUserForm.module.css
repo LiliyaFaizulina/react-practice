@@ -1,0 +1,36 @@
+.updateForm{
+    padding: 20px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    gap: 10px;
+    
+    background-color: aquamarine;
+    z-index: 1;
+    color: blue;
+}
+
+.updateFormInput {
+    margin-left: 5px;
+}
+
+.updateFormBtn{
+    padding: 5px 10px;
+    display: block;
+    cursor: pointer;
+    border: none;
+    background-color: blue;
+    box-shadow: 1px 2px 2px black;
+    color: aqua;
+    transition: color 300ms cubic-bezier(0.075, 0.82, 0.165, 1), background-color 300ms cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.updateFormBtn:hover, .updateFormBtn:focus{
+    color: blue;
+    background-color: aqua;
+}
