@@ -6,6 +6,12 @@
 }
 body {
   margin: 0;
+  padding: 10px;
+  background: radial-gradient(
+    circle,
+    rgba(174, 175, 181, 1) 0%,
+    rgba(84, 102, 173, 1) 100%
+  );
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
